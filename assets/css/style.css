@@ -1,0 +1,13 @@
+.containerPrincipal {
+    width: 80%;
+    height: auto;
+    margin: 1% auto;
+}
+
+body {
+    background-color: #ccc;
+}
+
+.nav-wrapper {
+    background-color: #666;
+}
