@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>BlackJack</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
@@ -12,24 +12,45 @@
 
     <main class="containerPrincipal">
         <header class="cabecalhoPrincipal">
-            <nav>
-                <div class="nav-wrapper">
-                    <a href="#" class="brand-logo">BlackJack</a>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a onclick="ojogo()">O jogo</a></li>
-                        <li><a href="tutorial.html">Como jogar</a></li>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">
+                    <img src="/assets/images/icone_naipes.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    BlackJack
+                </a>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="ojogo()">O jogo</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="#">Como Jogar</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
         </header>
-
         <section class="jogo">
-            <h4>Game</h4>
-            <button id="play" onclick="play()" class="btn waves-effect waves-light" type="button" name="action">Jogar</button>
-            <button id="replay" onclick="play()" class="btn waves-effect waves-light" type="button" name="action">Novo Jogo</button>
-            <button id="carta" onclick="card()" class="btn waves-effect waves-light" type="button" name="action">Pegar outra carta</button>
-            <button id="parei" onclick="play()" class="btn waves-effect waves-light" type="button" name="action">Manter cartas</button>
+            <section class="titulo">
+                <h2>Game</h2>
+            </section>
+            <section class="cartas">
+                <section class="cartasPlayerArea">
+                    <h4>Suas cartas:</h4>
+                    <div id="cartasDealer"></div>
+                </section>
+                <section class="cartasDealerArea">
+                    <h4>Cartas do Dealer:</h4>
+                    <div id="cartasDealer"></div>
+                </section>
+            </section>
+            <section class="escolhas">
+                <button id="play" onclick="play()" class="btn btn-success" type="button"name="action">Jogar</button>
+                <button id="replay" onclick="replay()" class="btn btn-success" type="button" name="action">Novo Jogo</button>
+                <button id="carta" onclick="card()" class="btn btn-primary" type="button" name="action">Pegar outra carta</button>
+                <button id="parei" onclick="parei()" class="btn btn-secondary" type="button" name="action">Mantercartas</button>
+            </section>
         </section>
+        
     </main>
 
     <script src="./assets/js/index.js"></script>
