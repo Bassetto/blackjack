@@ -1,14 +1,63 @@
-var jafoi = [];
-var deck = [];
-let valorCarta;
-let somaPlayer = 0;
-let somaDealer = 0;
+let comecou = false,
+    acabouDeck = false,
+    deck = [],
+    cartasPlayer = [],
+    cartasDealer = [],
+    pontosPlayer = 0,
+    pontosDealer = 0,
+    cartaEscolhida = [];
+
+let valoresCartas = carta => {
+    switch (carta) {
+        case "Ás":
+            return 1;
+        case "Dois":
+            return 2;
+        case "Três":
+            return 3;
+        case "Quatro":
+            return 4;
+        case "Cinco":
+            return 5;
+        case "Seis":
+            return 6;
+        case "Sete":
+            return 7;
+        case "Oito":
+            return 8;
+        case "Nove":
+            return 9;
+        case "Dez":
+            return 10;
+        case "Valete":
+            return 10;
+        case "Dama":
+            return 10;
+        case "Rei":
+            return 10;
+    }
+}
+
 window.onload = () => {
-    document.getElementById('replay').style = "display: none";
     document.getElementById('carta').style = "display: none";
     document.getElementById('parei').style = "display: none";
     fazerDeck();
+    update();
 };
+
+let update = () => {
+    if (!comecou) {
+        removerNodes("Player");
+        removerNodes("Dealer");
+        let node = document.createElement("p");
+        node.innerHTML = "Cartas do Player:";
+        document.getElementById('cartasPlayer').appendChild(node);
+        let para = document.createElement("p");
+        para.innerHTML = "Cartas do Dealer:";
+        document.getElementById('cartasDealer').appendChild(para);
+        return
+    }
+}
 
 function ojogo() {
     alert("Perdi");
@@ -40,90 +89,37 @@ const cartas = [
 function fazerDeck() {
     for (let i = 0; i < naipes.length; i++) {
         for (let c = 0; c < cartas.length; c++) {
-            let carta = [
-                cartas[c],
-                naipes[i]
-            ]
+            let carta = {
+                carta: cartas[c],
+                naipe: naipes[i]
+            }
             deck.push(carta);
         }
     }
 }
 
-function pegarCarta() {
-    let pegouCarta = true;
-
-    while (pegouCarta) {
-        let numeroCarta = Number(Math.floor(Math.random() * 52));
-
-        if (jafoi.includes(numeroCarta)) {
-
-        } else {
-            pegouCarta = false;
-            jafoi.push(numeroCarta);
-            cartaEscolhida = deck[numeroCarta];
-            return cartaEscolhida;
-        }
-    }
+let pegarCarta = () => {
+    let tmp,
+        numeroCarta = Number(Math.floor(Math.random() * 52));
+    tmp = deck[numeroCarta];
+    deck[numeroCarta] = deck[deck.length-1];
+    deck[deck.length-1] = tmp;
+    return deck.pop();
 };
 
-let acabouDeck = false;
-
 function play() {
-    let cartaEscolhida;
-    if (somaPlayer >= 21) {
+    
+    if (pontosPlayer > 21) {
         alert("estourou!")
         acabouDeck = true;
-        document.getElementById('replay').style = "display: initial";
-        document.getElementById('play').style = "display: none";
     } else if (!acabouDeck) {
 
-        if (jafoi.length == 52) {
+        if (deck.length < 0) {
             acabouDeck = true;
         } else {
-            cartaEscolhida = pegarCarta();
-    
-            switch (cartaEscolhida[0]) {
-                case "Ás":
-                    valorCarta = 1;
-                    break;
-                case "Dois":
-                    valorCarta = 2;
-                    break;
-                case "Três":
-                    valorCarta = 3;
-                    break;
-                case "Quatro":
-                    valorCarta = 4;
-                    break;
-                case "Cinco":
-                    valorCarta = 5;
-                    break;
-                case "Seis":
-                    valorCarta = 6;
-                    break;
-                case "Sete":
-                    valorCarta = 7;
-                    break;
-                case "Oito":
-                    valorCarta = 8;
-                    break;
-                case "Nove":
-                    valorCarta = 9;
-                    break;
-                case "Dez":
-                    valorCarta = 10;
-                    break;
-                case "Valete":
-                    valorCarta = 10;
-                    break;
-                case "Dama":
-                    valorCarta = 10;
-                    break;
-                case "Rei":
-                    valorCarta = 10;
-                    break;
-            }
-            somaPlayer += Number(valorCarta);
+            cartaEscolhida = pegarCarta()
+            valorCarta = valoresCartas(cartaEscolhida.carta);
+            pontosPlayer += Number(valorCarta);
             adicionarNodes("Player");
             adicionarNodes("Dealer");
         }
@@ -136,24 +132,21 @@ function play() {
 
 async function replay() {
     document.getElementById('play').style = "display: initial";
-    document.getElementById('replay').style = "display: none";
     await removerNodes("Player");
     await removerNodes("Dealer");
     acabouDeck = false;
-    jafoi = [];
-    somaPlayer = 0;
-    somaDealer = 0;
+    pontosPlayer = 0;
+    pontosDealer = 0;
 }
 
 function adicionarNodes(quem) {
     let node = document.createElement("p");
-    let textnode = document.createTextNode(`${cartaEscolhida[0]} de ${cartaEscolhida[1]}, vale: ${valorCarta}`);
-    node.appendChild(textnode);
-    document.getElementById('.cartas'+quem).appendChild(node);
+    node.innerHTML = `${cartaEscolhida.carta} de ${cartaEscolhida.naipe}, vale: ${valorCarta}`;
+    document.getElementById(`cartas${quem}`).appendChild(node);
 }
 
 function removerNodes(quem) {
-    let list = document.getElementById('.cartas' + quem);
+    let list = document.getElementById(`cartas${quem}`);
     while (list.childNodes.length != 0) {
         let i = 0;
         list.removeChild(list.childNodes[i]);
