@@ -44,9 +44,9 @@ let = valorCarta = carta => {
         }
 }
 
-let ngbtn = document.getElementById('replay').style,
-    cardBtn = document.getElementById('carta').style,
-    stayBtn = document.getElementById('parei').style,
+let ngbtn = document.getElementById('replay'),
+    cardBtn = document.getElementById('carta'),
+    stayBtn = document.getElementById('parei'),
     cartasPlayer = document.getElementById('cartasPlayer'),
     cartasDealer = document.getElementById('cartasDealer');
 
@@ -104,10 +104,19 @@ ngbtn.addEventListener("click", () => {
     comecou = true;
     acabou = false;
     PlayerGanhou = false;
+
+    fazerDeck();
+    cartasPlayer = [pegarCarta(), pegarCarta()];
+    cartasPlayer = [pegarCarta(), pegarCarta()];
+
+    ngbtn.style.display = "none";
+    cardBtn.style.display = "inline";
+    stayBtn.style.display = "inline";
+    status();
 });
 
 cardBtn.addEventListener("click", () => {
-    ver
+    cartasPlayer.push(pegarCarta());
 })
 
 stayBtn.addEventListener("click", () => {
@@ -126,13 +135,13 @@ let pegarCarta = () => {
     return deck.pop();
 };
 
-let verificarEstadoDoJogo = () => {
+let updateGame = () => {
 
     atualizarScore();
 
     if(jogoFinalizado){
         while (dealerPontos < jogadorPontos && jogadorPontos <= 21 && dealerPontos <= 21) {
-                dealerCartas.push(pegarCarta());
+                cartasDealer.push(pegarCarta());
                 atualizarScore();
             }
     }

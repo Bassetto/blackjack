@@ -42,19 +42,10 @@ window.onload = () => {
     document.getElementById('carta').style = "display: none";
     document.getElementById('parei').style = "display: none";
     fazerDeck();
-    update();
 };
 
 let update = () => {
     if (!comecou) {
-        removerNodes("Player");
-        removerNodes("Dealer");
-        let node = document.createElement("p");
-        node.innerHTML = "Cartas do Player:";
-        document.getElementById('cartasPlayer').appendChild(node);
-        let para = document.createElement("p");
-        para.innerHTML = "Cartas do Dealer:";
-        document.getElementById('cartasDealer').appendChild(para);
         return
     }
 }
