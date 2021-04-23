@@ -14,7 +14,7 @@
         <header class="cabecalhoPrincipal">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="navbar-brand" href="#">
-                    <img src="/assets/images/icone_naipes.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <img src="./assets/images/icone_naipes.png" width="30" height="30" class="d-inline-block align-top" alt="">
                     BlackJack
                 </a>
                 <div class="collapse navbar-collapse" id="navbarColor01">
@@ -32,21 +32,22 @@
         <section class="jogo">
             <section class="titulo">
                 <h2>Game</h2>
+                <p id="msg"></p>
             </section>
             <section class="cartas">
                 <section class="cartasPlayerArea">
-                    <p>Cartas do Player:</p>
+                    <h4>Cartas do Player:</h4>
                     <div id="cartasPlayer"></div>
                 </section>
                 <section class="cartasDealerArea">
-                    <p>Cartas do Dealer:</p>
+                    <h4>Cartas do Dealer:</h4>
                     <div id="cartasDealer"></div>
                 </section>
             </section>
             <section class="escolhas">
-                <button id="play" onclick="play()" class="btn btn-success" type="button"name="action">Novo Jogo</button>
-                <button id="carta" onclick="card()" class="btn btn-primary" type="button" name="action">Pegar outra carta</button>
-                <button id="parei" onclick="parei()" class="btn btn-secondary" type="button" name="action">Mantercartas</button>
+                <button id="play" onclick="newGame()" class="btn btn-success" type="button"name="action">Novo Jogo</button>
+                <button id="buyCard" onclick="buyCard()" class="btn btn-primary" type="button" name="action">Pegar outra carta</button>
+                <button id="stand" onclick="stand()" class="btn btn-secondary" type="button" name="action">Mantercartas</button>
             </section>
         </section>
         
